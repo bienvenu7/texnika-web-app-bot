@@ -33,7 +33,7 @@ const Description = (props: Props) => {
             <div className="stars">
               {Array.from({ length: 5 }, (_, index) => index + 1).map(
                 (item) => (
-                  <button>
+                  <button key={item}>
                     <SvgSelector id="star" />
                   </button>
                 )

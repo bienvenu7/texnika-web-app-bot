@@ -30,7 +30,7 @@ const CardProduct = ({ myCard, isLoved }: Props) => {
         <h3>{myCard.name}</h3>
         <div className="stars">
           {Array.from({ length: 5 }, (_, index) => index + 1).map((item) => (
-            <button>
+            <button key={item}>
               <SvgSelector id="star" />
             </button>
           ))}

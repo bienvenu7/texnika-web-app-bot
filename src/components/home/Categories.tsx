@@ -19,7 +19,7 @@ const Categories = (props: Props) => {
         <h2>Categories</h2>
         <div className="categories__cards">
           {Array.from({ length: 20 }, (_, index) => index + 1).map((number) => (
-            <div className="categories__rows">
+            <div key={number} className="categories__rows">
               <CardCategory category={cardCategory} />
               <CardCategory category={cardCategory} />
             </div>
