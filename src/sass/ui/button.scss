@@ -1,0 +1,32 @@
+@import "../vars";
+
+@mixin btn($width, $height, $raduis, $bg) {
+  all: unset;
+  width: $width;
+  height: $height;
+  border-radius: $raduis;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  // background-color: $bg;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+    color: $black-black-clr;
+    position: relative;
+    z-index: 0;
+  }
+
+  & > span {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: $primary-clr;
+    font-size: 18px;
+    font-weight: 500;
+    z-index: 1;
+  }
+}

@@ -1,0 +1,81 @@
+@import "../sass/vars";
+@import "../sass/ui/typography.scss";
+
+.categories {
+  &__container {
+    width: 100vw;
+    height: auto;
+    overflow-x: hidden;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  &__box {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    & > h2 {
+      @include h2();
+      padding-left: 10px;
+    }
+  }
+
+  &__cards {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 20px;
+    overflow-x: scroll;
+    padding: 0 10px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  &__card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 150px;
+    height: auto;
+    border-radius: 15px;
+    background-color: $neutral-grey-clr;
+    padding: 7.5px;
+
+    & > span {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+  &__picture {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+
+    & > .img {
+      width: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+}

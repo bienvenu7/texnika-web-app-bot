@@ -1,0 +1,58 @@
+@import "../sass/vars";
+
+.cover {
+  &__container {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  &__box {
+    width: $main-width;
+    height: 300px;
+    background-color: $neutral-grey-clr;
+    border-radius: 30px;
+    margin-top: 80px;
+    background-image: url("/assets/pictures/header.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    & > h1 {
+      font-size: 42px;
+      font-weight: 600;
+      font-style: normal;
+      margin-left: 20px;
+    }
+
+    & > p {
+      font-size: 18px;
+      font-weight: 400;
+      font-style: normal;
+      width: 200px;
+      margin-left: 20px;
+    }
+
+    & > button {
+      all: unset;
+      width: auto;
+      height: auto;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: $primary-clr;
+      border-radius: 30px;
+      padding: 10px 30px;
+      color: $bg-clr;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+  }
+}

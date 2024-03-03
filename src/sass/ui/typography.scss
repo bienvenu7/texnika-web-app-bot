@@ -1,0 +1,8 @@
+@import "../vars";
+
+@mixin h2() {
+  font-size: 20px;
+  font-weight: 600;
+  font-style: normal;
+  color: $black-black-clr;
+}
