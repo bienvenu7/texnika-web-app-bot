@@ -1,17 +1,9 @@
 import { instance } from "@/instance";
+import { ICart } from "@/types/app";
 
-export const checkout = async () => {
+export const checkout = async (cart: ICart[]) => {
   try {
-    const response = await instance.post(
-      "checkout",
-      {},
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await instance.post("checkout", cart);
     return response.data;
   } catch (error) {
     return error;

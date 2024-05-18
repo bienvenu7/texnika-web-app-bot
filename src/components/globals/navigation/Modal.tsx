@@ -13,6 +13,7 @@ import React, { ReactNode } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { checkout } from "@/utils/apis/checkout";
+import { useRouter } from "next/router";
 
 type Props = {
   type: string;
@@ -23,6 +24,7 @@ const Modal = ({ type, query }: Props) => {
   const products = useSelector(selectAllProducts);
   const cart = useSelector(selectCart);
   const dispatch: AppDispatch = useDispatch();
+  const router = useRouter();
 
   const addToCart = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -56,7 +58,8 @@ const Modal = ({ type, query }: Props) => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    const res = await checkout();
+    const res = await checkout(cart);
+    router.push(res.url);
   };
 
   const GetType = (): ReactNode => {
