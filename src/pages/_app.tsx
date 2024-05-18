@@ -1,11 +1,26 @@
 import Layout from "@/components/globals/Layout";
+import telegram, { tg } from "@/hooks/telegram";
+import { store } from "@/redux/store";
 import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (tg) {
+      tg.ready();
+    }
+  }, []);
+
+  const { queryId, user } = telegram();
+
+  console.log(user, queryId);
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Provider store={store}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </Provider>
   );
 }

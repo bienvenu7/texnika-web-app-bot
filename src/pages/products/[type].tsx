@@ -1,18 +1,32 @@
 import CardProduct from "@/components/home/CardProduct";
-import { IProduct } from "@/components/home/Products";
 import SvgSelector from "@/components/main/SvgSelector";
-import React from "react";
+import { SetPictures } from "@/redux/reducers/categoryReducers";
+import { AppDispatch } from "@/redux/store";
+import { ICategory, IPicture, IProduct } from "@/types/app";
+import { getCategories } from "@/utils/apis/categories";
+import { getPicturesAll } from "@/utils/apis/picture";
+import { getProducts } from "@/utils/apis/product";
+import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-type Props = {};
-
-const myCard: IProduct = {
-  id: 1,
-  url: "/assets/pictures/header.png",
-  name: "Mark Jacobs Trends",
-  price: 990,
+type Props = {
+  products: IProduct[];
+  images: IPicture[];
+  categories: ICategory[];
 };
 
-const ProductPage = (props: Props) => {
+const ProductPage = ({ products, images, categories }: Props) => {
+  const router = useRouter();
+  const type = router.query.type as string;
+
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(SetPictures(images));
+  }, []);
+
   return (
     <div className="productsPage__container">
       <div className="productsPage__filtre">
@@ -29,14 +43,46 @@ const ProductPage = (props: Props) => {
         </button>
       </div>
       <div className="productsPage__box">
+        <div className="productsPage__top">
+          <h1>
+            {type !== "all"
+              ? categories.filter((el) => (el.id as string) === type)[0]?.name
+              : "All products"}
+          </h1>
+          <span>
+            {type !== "all"
+              ? `${
+                  products.filter((el) => el.categoryId === type).length
+                } items`
+              : `${products.length} items`}
+          </span>
+        </div>
         <div className="productsPage__products">
-          {Array.from({ length: 8 }, (_, index) => index + 1).map((item) => (
-            <CardProduct key={myCard.id} myCard={myCard} isLoved={false} />
-          ))}
+          {products
+            ?.filter((el) =>
+              type !== "all" ? el.categoryId === type : el.categoryId !== type
+            )
+            .map((item) => (
+              <CardProduct key={item.id} myCard={item} isLoved={false} />
+            ))}
         </div>
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const products = await getProducts();
+  const images = await getPicturesAll();
+  const categories = await getCategories();
+
+  return {
+    props: {
+      products,
+      images,
+      categories,
+    },
+  };
 };
 
 export default ProductPage;

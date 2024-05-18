@@ -1,26 +1,96 @@
+import {
+  AddToCart,
+  DecrimentCart,
+  IncrimentCart,
+} from "@/redux/reducers/product";
+import {
+  selectAllProducts,
+  selectCart,
+} from "@/redux/selectors/productSelector";
+import { AppDispatch } from "@/redux/store";
+import { ICart, IProduct } from "@/types/app";
 import React, { ReactNode } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FiMinus, FiPlus } from "react-icons/fi";
+import { checkout } from "@/utils/apis/checkout";
 
 type Props = {
   type: string;
+  query: string;
 };
 
-const Modal = ({ type }: Props) => {
+const Modal = ({ type, query }: Props) => {
+  const products = useSelector(selectAllProducts);
+  const cart = useSelector(selectCart);
+  const dispatch: AppDispatch = useDispatch();
+
+  const addToCart = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+
+    const prod = products.find((el) => el.id === query) as IProduct;
+    let cartProduct: ICart = {
+      categoryId: prod?.categoryId,
+      id: prod?.id,
+      items: 1,
+      name: prod?.name,
+      price: prod?.price,
+    };
+    dispatch(AddToCart(cartProduct));
+  };
+
+  const increase = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    const item = cart.filter((el) => el.id === query);
+    dispatch(IncrimentCart(item[0]));
+  };
+
+  const decrease = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    const item = cart.filter((el) => el.id === query);
+    dispatch(DecrimentCart(item[0]));
+  };
+
+  const goBuy = async (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    const res = await checkout();
+  };
+
   const GetType = (): ReactNode => {
     switch (type) {
       case "reviews":
         return <button>Add Review</button>;
         break;
       case "product":
-        return <button>Add to Card</button>;
+        const index = cart.findIndex((el) => el.id === query);
+        if (index > -1) {
+          return (
+            <div className="btns">
+              <button onClick={decrease}>
+                <FiMinus />
+              </button>
+              <span>{cart[index].items}</span>
+              <button onClick={increase}>
+                <FiPlus />
+              </button>
+            </div>
+          );
+        } else {
+          return <button onClick={addToCart}>Add to Card</button>;
+        }
         break;
       case "cart":
-        return <button>Go Billing</button>;
+        return <button onClick={goBuy}>Go Billing</button>;
         break;
       default:
         return <></>;
         break;
     }
   };
+
   return (
     <div className="modal__container">
       <div className="modal__box">{GetType()}</div>

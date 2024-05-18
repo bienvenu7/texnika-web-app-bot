@@ -13,12 +13,19 @@ const Layout = ({ children }: Props) => {
   const router = useRouter();
   return (
     <>
-      {router.asPath === "/" ? <Header /> : <TopBar />}
+      {router.asPath === "/" || router.asPath === "/cart" ? (
+        <Header />
+      ) : (
+        <TopBar />
+      )}
       <main>{children}</main>
       {router.asPath === "/" || router.asPath.split("/")[1] === "products" ? (
         <Footer />
       ) : (
-        <Modal type={router.asPath.split("/")[1]} />
+        <Modal
+          type={router.asPath.split("/")[1]}
+          query={router.query.id as string}
+        />
       )}
     </>
   );

@@ -1,8 +1,11 @@
+import { selectPictures } from "@/redux/selectors/productSelector";
+import { IPicture, IProduct } from "@/types/app";
+import { getPictures } from "@/utils/apis/picture";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import SvgSelector from "../main/SvgSelector";
-import { IProduct } from "./Products";
 
 type Props = {
   myCard: IProduct;
@@ -12,13 +15,19 @@ type Props = {
 const CardProduct = ({ myCard, isLoved }: Props) => {
   const router = useRouter();
 
+  const images = useSelector(selectPictures).filter(
+    (el) => el.referId === myCard.id
+  );
+
   return (
     <div
-      onClick={() => router.push(`/product/1`, undefined, { shallow: true })}
+      onClick={() =>
+        router.push(`/product/${myCard.id}`, undefined, { shallow: true })
+      }
       className={isLoved ? "products__card loved" : "products__card"}
     >
       <div className="products__card--top">
-        <Image src={myCard.url} alt="" fill />
+        <Image src={images[0]?.url} alt="" fill />
         <button>
           <SvgSelector id="heart" />
         </button>

@@ -1,29 +1,23 @@
+import { ICategory } from "@/types/app";
 import React from "react";
 import CardCategory from "./CardCategory";
 
-export interface ICategory {
-  url: string;
-  name: string;
+interface Props {
+  categories: ICategory[];
 }
-const cardCategory: ICategory = {
-  name: "Iron",
-  url: "/assets/pictures/iron.jpg",
-};
 
-type Props = {};
-
-const Categories = (props: Props) => {
+const Categories = ({ categories }: Props) => {
   return (
     <div className="categories__container">
       <div className="categories__box">
         <h2>Categories</h2>
         <div className="categories__cards">
-          {Array.from({ length: 20 }, (_, index) => index + 1).map((number) => (
-            <div key={number} className="categories__rows">
-              <CardCategory category={cardCategory} />
-              <CardCategory category={cardCategory} />
-            </div>
-          ))}
+          {categories &&
+            categories.map((el, index) => (
+              <div key={el.id} className="categories__rows">
+                <CardCategory category={el} />
+              </div>
+            ))}
         </div>
       </div>
     </div>
