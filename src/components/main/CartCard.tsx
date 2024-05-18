@@ -14,8 +14,6 @@ const CartCard = ({ cart }: Props) => {
   const images = useSelector(selectPictures).filter(
     (el) => el.referId === cart.id
   );
-
-  console.log(images);
   return (
     <div key={cart.id} className="cart__card">
       <div className="cart__card--left">

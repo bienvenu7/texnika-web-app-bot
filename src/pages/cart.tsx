@@ -1,14 +1,11 @@
-import CartCard from "@/components/main/cartCard";
-import SvgSelector from "@/components/main/SvgSelector";
+import CartCard from "../components/main/CartCard";
 import { selectCart } from "@/redux/selectors/productSelector";
-import Image from "next/image";
 import React from "react";
-import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
 type Props = {};
 
-const cart = (props: Props) => {
+const Cart = (props: Props) => {
   const cart = useSelector(selectCart);
 
   return (
@@ -25,4 +22,4 @@ const cart = (props: Props) => {
   );
 };
 
-export default cart;
+export default Cart;
