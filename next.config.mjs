@@ -4,9 +4,9 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "8181",
+        protocol: "https",
+        hostname: "emfcc-backend.onrender.com",
+        port: "",
         pathname: "/uploads/**",
       },
     ],

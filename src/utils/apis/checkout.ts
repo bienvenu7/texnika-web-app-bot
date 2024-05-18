@@ -7,7 +7,7 @@ export const checkout = async () => {
       {},
       {
         headers: {
-          "Access-Control-Allow-Origin": "https://localhost:8181/",
+          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }

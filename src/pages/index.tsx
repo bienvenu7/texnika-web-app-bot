@@ -22,6 +22,8 @@ interface Props {
 export default function Home({ categories, products, images }: Props) {
   const dispatch: AppDispatch = useDispatch();
 
+  console.log(images);
+
   useEffect(() => {
     dispatch(SetAllProducts(products));
     dispatch(SetPictures(images));
