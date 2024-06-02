@@ -9,11 +9,12 @@ import {
 } from "@/redux/selectors/productSelector";
 import { AppDispatch } from "@/redux/store";
 import { ICart, IProduct } from "@/types/app";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { checkout } from "@/utils/apis/checkout";
 import { useRouter } from "next/router";
+import { SetOpenModal } from "@/redux/reducers/categoryReducers";
 
 type Props = {
   type: string;
@@ -54,14 +55,6 @@ const Modal = ({ type, query }: Props) => {
     dispatch(DecrimentCart(item[0]));
   };
 
-  const goBuy = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-    const res = await checkout(cart);
-    router.push(res.url);
-  };
-
   const GetType = (): ReactNode => {
     switch (type) {
       case "reviews":
@@ -86,7 +79,11 @@ const Modal = ({ type, query }: Props) => {
         }
         break;
       case "cart":
-        return <button onClick={goBuy}>Go Billing</button>;
+        return (
+          <button onClick={() => dispatch(SetOpenModal(true))}>
+            Go Billing
+          </button>
+        );
         break;
       default:
         return <></>;

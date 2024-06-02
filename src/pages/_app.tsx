@@ -7,15 +7,6 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    if (tg) {
-      tg.ready();
-    }
-  }, []);
-
-  const { queryId, user } = telegram();
-
-  console.log(user, queryId);
   return (
     <Provider store={store}>
       <Layout>

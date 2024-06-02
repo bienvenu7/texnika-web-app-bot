@@ -29,6 +29,17 @@ export interface ICart {
   price: number;
 }
 
+export interface IOrder {
+  id?: number;
+  userId?: number;
+  status?: string;
+  totalItems?: number;
+  payementMethod?: string;
+  address: string;
+  list?: string;
+  cart?: ICart[];
+}
+
 export interface IRaiting {
   id: string;
   starts: number;
