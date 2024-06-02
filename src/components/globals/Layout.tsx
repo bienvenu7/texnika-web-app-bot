@@ -36,6 +36,7 @@ const Layout = ({ children }: Props) => {
         <TopBar />
       )}
       <main>{children}</main>
+
       {router.asPath === "/" || router.asPath.split("/")[1] === "products" ? (
         <Footer />
       ) : (

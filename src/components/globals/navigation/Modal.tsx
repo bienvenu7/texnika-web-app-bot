@@ -15,6 +15,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import { checkout } from "@/utils/apis/checkout";
 import { useRouter } from "next/router";
 import { SetOpenModal } from "@/redux/reducers/categoryReducers";
+import Popup from "../Popup";
 
 type Props = {
   type: string;
@@ -82,6 +83,7 @@ const Modal = ({ type, query }: Props) => {
         return (
           <button onClick={() => dispatch(SetOpenModal(true))}>
             Go Billing
+            <Popup />
           </button>
         );
         break;
