@@ -860,7 +860,7 @@ footer {
     & > input,
     select {
       all: unset;
-      width: cal(100% - 10px);
+      width: calc(100% - 10px);
       height: auto;
       padding: 5px;
       font-size: 16px;
