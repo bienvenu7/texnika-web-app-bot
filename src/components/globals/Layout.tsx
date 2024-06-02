@@ -22,10 +22,6 @@ const Layout = ({ children }: Props) => {
     }
   }, []);
 
-  const { queryId, user } = telegram();
-  dispatch(SetuserId(user?.id as number));
-
-  console.log(user, queryId);
   const router = useRouter();
 
   return (
