@@ -865,26 +865,32 @@ footer {
       padding: 5px;
       font-size: 16px;
       color: $black-black-clr;
+      border: 1px solid $grey;
+      border-radius: 20px;
     }
   }
 
   &__btns {
-    all: unset;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     gap: 5px;
     width: 100%;
-    background-color: $primary-clr;
-    color: $bg-clr;
-    font-size: 16px;
-    font-weight: 500;
 
-    &:nth-child(2) {
-      border: 1px solid $primary-clr;
-      background-color: transparent;
-      color: $primary-clr;
+    & > button {
+      all: unset;
+      background-color: $primary-clr;
+      color: $bg-clr;
+      font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+
+      &:nth-child(2) {
+        border: 1px solid $primary-clr;
+        background-color: transparent;
+        color: $primary-clr;
+      }
     }
   }
 }
