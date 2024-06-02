@@ -817,7 +817,7 @@ footer {
 
 .popup {
   &__container {
-    width: 100%;
+    width: calc(100vw - 20px);
     height: auto;
     background-color: $bg-clr;
     display: flex;
