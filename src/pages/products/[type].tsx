@@ -48,7 +48,7 @@ const ProductPage = ({ products, images, categories }: Props) => {
       <div className="productsPage__box">
         <div className="productsPage__top">
           <h1>
-            {type !== `all ${queryId}`
+            {type !== `all`
               ? categories.filter((el) => (el.id as string) === type)[0]?.name
               : "All products"}
           </h1>
