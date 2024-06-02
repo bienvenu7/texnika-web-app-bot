@@ -50,7 +50,7 @@ const ProductPage = ({ products, images, categories }: Props) => {
           <h1>
             {type !== `all`
               ? categories.filter((el) => (el.id as string) === type)[0]?.name
-              : `All products ${user?.id}`}
+              : `All products ${queryId}`}
           </h1>
           <span>
             {type !== "all"
