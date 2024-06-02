@@ -16,12 +16,6 @@ type Props = {
 const Layout = ({ children }: Props) => {
   const dispatch: AppDispatch = useDispatch();
 
-  useEffect(() => {
-    if (tg) {
-      tg.ready();
-    }
-  }, []);
-
   const router = useRouter();
 
   return (

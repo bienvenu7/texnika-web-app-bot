@@ -7,6 +7,12 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (tg) {
+      tg.ready();
+    }
+  }, []);
+
   return (
     <Provider store={store}>
       <Layout>
