@@ -34,6 +34,7 @@ const Popup = (props: Props) => {
       cart,
       userId,
     });
+    console.log(res);
     dispatch(SetOpenModal(false));
     router.push(res.url);
   };
