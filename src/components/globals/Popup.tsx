@@ -58,7 +58,7 @@ const Popup = (props: Props) => {
         <div className="popup__box">
           <div className="popup__info">
             <div className="popup__input">
-              <label htmlFor="address">Deliver's Address*</label>
+              <label htmlFor="address">{"Deliver's Address*"}</label>
               <input
                 type={"text"}
                 required
@@ -68,7 +68,7 @@ const Popup = (props: Props) => {
               />
             </div>
             <div className="popup__input">
-              <label htmlFor="method">Deliver's Address*</label>
+              <label htmlFor="method">Payement Method*</label>
               <select
                 onChange={(e) => setMethod(e.target.value)}
                 name="methos"
