@@ -46,8 +46,7 @@ const Popup = (props: Props) => {
           left: "50%",
           right: "auto",
           bottom: "auto",
-          marginRight: "-50%",
-          transform: "transl#fefefe",
+          transform: "translate(-50%, -50%)",
         },
         overlay: {
           backgroundColor: "rgba(21, 24, 33, .8)",

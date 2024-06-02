@@ -848,7 +848,7 @@ footer {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 2px;
     width: 100%;
 
     & > label {
@@ -857,7 +857,8 @@ footer {
       color: $black-black-clr;
     }
 
-    & > input {
+    & > input,
+    select {
       all: unset;
       width: 100%;
       border-radius: 20px;
@@ -866,7 +867,6 @@ footer {
       font-size: 16px;
       color: $black-black-clr;
       border: 1px solid $grey;
-      border-radius: 20px;
     }
   }
 
@@ -885,6 +885,10 @@ footer {
       font-size: 16px;
       font-weight: 500;
       width: 100%;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &:nth-child(2) {
         border: 1px solid $primary-clr;
