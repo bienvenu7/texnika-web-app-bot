@@ -1,5 +1,6 @@
 import CardProduct from "@/components/home/CardProduct";
 import SvgSelector from "@/components/main/SvgSelector";
+import telegram from "@/hooks/telegram";
 import { SetPictures } from "@/redux/reducers/categoryReducers";
 import { AppDispatch } from "@/redux/store";
 import { ICategory, IPicture, IProduct } from "@/types/app";
@@ -27,6 +28,8 @@ const ProductPage = ({ products, images, categories }: Props) => {
     dispatch(SetPictures(images));
   }, []);
 
+  const { user, queryId } = telegram();
+
   return (
     <div className="productsPage__container">
       <div className="productsPage__filtre">
@@ -45,7 +48,7 @@ const ProductPage = ({ products, images, categories }: Props) => {
       <div className="productsPage__box">
         <div className="productsPage__top">
           <h1>
-            {type !== "all"
+            {type !== `all ${user?.id}`
               ? categories.filter((el) => (el.id as string) === type)[0]?.name
               : "All products"}
           </h1>
