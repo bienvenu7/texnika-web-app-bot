@@ -6,7 +6,7 @@ import {
   selectUserId,
 } from "@/redux/selectors/productSelector";
 import { AppDispatch } from "@/redux/store";
-import { checkout } from "@/utils/apis/checkout";
+import { checkout, createOrder } from "@/utils/apis/checkout";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Modal from "react-modal";
@@ -30,15 +30,20 @@ const Popup = (props: Props) => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    const res = await checkout({
+    const res = await createOrder({
       address,
       payementMethod: method,
       cart,
       userId: user?.id,
     });
-    console.log(res);
-    dispatch(SetOpenModal(false));
-    router.push(res.url);
+
+    if (res.id === undefined) {
+      return;
+    } else {
+      console.log(res);
+      dispatch(SetOpenModal(false));
+      // router.push(res.url);
+    }
   };
   return (
     <Modal
