@@ -1,3 +1,4 @@
+import telegram from "@/hooks/telegram";
 import { SetOpenModal } from "@/redux/reducers/categoryReducers";
 import {
   selectCart,
@@ -18,11 +19,12 @@ type Props = {};
 const Popup = (props: Props) => {
   const cart = useSelector(selectCart);
   const openModal = useSelector(selectOpenModal);
-  const userId = useSelector(selectUserId);
   const dispatch: AppDispatch = useDispatch();
   const router = useRouter();
   const [address, setAddress] = useState<string>("");
   const [method, setMethod] = useState<string>("");
+
+  const { user, queryId } = telegram();
 
   const goBuy = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -32,11 +34,14 @@ const Popup = (props: Props) => {
       address,
       payementMethod: method,
       cart,
-      userId,
+      userId: user?.id,
     });
-    console.log(res);
-    dispatch(SetOpenModal(false));
-    router.push(res.url);
+    if (res.status === "200") {
+      dispatch(SetOpenModal(false));
+      router.push(res.url);
+    } else {
+      return;
+    }
   };
   return (
     <Modal

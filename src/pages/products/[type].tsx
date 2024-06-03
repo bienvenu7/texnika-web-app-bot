@@ -28,8 +28,6 @@ const ProductPage = ({ products, images, categories }: Props) => {
     dispatch(SetPictures(images));
   }, []);
 
-  const { user, queryId } = telegram();
-
   return (
     <div className="productsPage__container">
       <div className="productsPage__filtre">
@@ -50,7 +48,7 @@ const ProductPage = ({ products, images, categories }: Props) => {
           <h1>
             {type !== `all`
               ? categories.filter((el) => (el.id as string) === type)[0]?.name
-              : `All products ${queryId}`}
+              : `All products `}
           </h1>
           <span>
             {type !== "all"
