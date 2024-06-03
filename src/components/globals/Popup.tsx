@@ -66,7 +66,7 @@ const Popup = (props: Props) => {
         <div className="popup__box">
           <div className="popup__info">
             <div className="popup__input">
-              <label htmlFor="address">{"Deliver's Address*"}</label>
+              <label htmlFor="address">{`Deliver's Address* ${user?.id}`}</label>
               <input
                 type={"text"}
                 required
