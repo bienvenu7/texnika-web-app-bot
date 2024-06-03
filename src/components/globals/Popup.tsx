@@ -25,7 +25,6 @@ const Popup = (props: Props) => {
   const [method, setMethod] = useState<string>("");
 
   const { user, queryId } = telegram();
-  //
 
   const goBuy = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
