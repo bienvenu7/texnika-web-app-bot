@@ -12,7 +12,10 @@ export const checkout = async (cart: IOrder) => {
 
 export const createOrder = async (cart: IOrder) => {
   try {
-    const response = await instance.post(`create-order/${cart.userId}`, cart);
+    const response = await instance.post(
+      `checkout/create-order/${cart.userId}`,
+      cart
+    );
     return response.data;
   } catch (error) {
     return error;
