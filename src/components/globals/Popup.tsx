@@ -36,12 +36,9 @@ const Popup = (props: Props) => {
       cart,
       userId: user?.id,
     });
-    if (res.status === "200") {
-      dispatch(SetOpenModal(false));
-      router.push(res.url);
-    } else {
-      return;
-    }
+    console.log(res);
+    dispatch(SetOpenModal(false));
+    router.push(res.url);
   };
   return (
     <Modal
