@@ -484,6 +484,13 @@ footer {
       transition: 0.5s;
       background: rgba(255, 255, 255, 0.2);
 
+      &.like {
+        background: rgba($color: $pink-clr, $alpha: 0.2);
+        & > svg {
+          stroke: $pink-clr;
+        }
+      }
+
       & > svg {
         stroke: $black-black-clr;
       }

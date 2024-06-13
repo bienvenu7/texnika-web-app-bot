@@ -1,17 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { ICart, ICategory, IProduct } from "@/types/app";
+import { ICart, ICategory, ILike, IProduct } from "@/types/app";
 
 export interface Iinitial {
   products: IProduct[];
   product: IProduct | null;
   cart: ICart[];
+  likes: ILike[];
 }
 
 const initialState: Iinitial = {
   products: [],
   product: null,
   cart: [],
+  likes: [],
 };
 
 export const productSlice = createSlice({
@@ -55,6 +57,26 @@ export const productSlice = createSlice({
     DeleteItemToCart: (state, action: PayloadAction<ICart>) => {
       state.cart.filter((el) => el.id !== action.payload.id);
     },
+    SetLike: (state, action: PayloadAction<ILike[]>) => {
+      state.likes = action.payload;
+    },
+    AddLike: (state, action: PayloadAction<ILike>) => {
+      const index = state.likes.findIndex(
+        (el) =>
+          el.productId === action.payload.productId &&
+          el.userId === action.payload.userId
+      );
+
+      if (index < -1) {
+        state.likes = [...state.likes, action.payload];
+      } else {
+        state.likes.filter(
+          (el) =>
+            el.productId !== action.payload.productId &&
+            el.userId !== action.payload.userId
+        );
+      }
+    },
   },
 });
 
@@ -65,6 +87,8 @@ export const {
   DeleteItemToCart,
   DecrimentCart,
   IncrimentCart,
+  AddLike,
+  SetLike,
 } = productSlice.actions;
 
 export default productSlice.reducer;

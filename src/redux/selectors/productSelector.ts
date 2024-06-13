@@ -14,3 +14,5 @@ export const selectOpenModal = (state: RootState) =>
   state.categorySlice.openModal;
 
 export const selectUserId = (state: RootState) => state.categorySlice.userId;
+
+export const selectLikes = (state: RootState) => state.productSlice.likes;

@@ -46,4 +46,10 @@ export interface IRaiting {
   comment: string;
   productId: string | null;
 }
-//bhjgh
+
+export interface ILike {
+  id?: string;
+  productId: string;
+  createdAt?: Date;
+  userId: number;
+}
