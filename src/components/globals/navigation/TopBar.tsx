@@ -44,11 +44,12 @@ const TopBar = (props: Props) => {
           el.productId === productId && el.userId === parseInt(user?.id as any)
       )[0].id as string;
 
-      if (like) {
+      if (like === true) {
         const removedLikes = await removeLike(id);
 
         if (removedLikes === 200) {
           dispatch(DeleteLike(id));
+          setLike(!like);
         }
       } else {
         const newLike: ILike = await addLike({
