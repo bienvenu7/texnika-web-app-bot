@@ -37,6 +37,15 @@ export const addLike = async (data: ILike) => {
   }
 };
 
+export const removeLike = async (id: string) => {
+  try {
+    const { status } = await instance.post(`/product/remove-like/${id}`, {});
+    return status;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getLikes = async () => {
   try {
     const response = await instance.get(`/product/get-like`);

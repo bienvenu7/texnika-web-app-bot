@@ -1,10 +1,10 @@
 import SvgSelector from "@/components/main/SvgSelector";
 import telegram from "@/hooks/telegram";
-import { AddLike } from "@/redux/reducers/product";
+import { AddLike, DeleteLike } from "@/redux/reducers/product";
 import { selectLikes } from "@/redux/selectors/productSelector";
 import { AppDispatch } from "@/redux/store";
 import { ILike } from "@/types/app";
-import { addLike } from "@/utils/apis/product";
+import { addLike, removeLike } from "@/utils/apis/product";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,14 +39,27 @@ const TopBar = (props: Props) => {
     event.preventDefault();
 
     try {
-      const newLike: ILike = await addLike({
-        productId,
-        userId: parseInt(user?.id as any),
-      });
+      const id = likes.filter(
+        (el) =>
+          el.productId === productId && el.userId === parseInt(user?.id as any)
+      )[0].id as string;
 
-      if (newLike) {
-        dispatch(AddLike(newLike));
-        setLike(!like);
+      if (like) {
+        const removedLikes = await removeLike(id);
+
+        if (removedLikes === 200) {
+          dispatch(DeleteLike(id));
+        }
+      } else {
+        const newLike: ILike = await addLike({
+          productId,
+          userId: parseInt(user?.id as any),
+        });
+
+        if (newLike) {
+          dispatch(AddLike(newLike));
+          setLike(!like);
+        }
       }
     } catch (error) {
       return error;

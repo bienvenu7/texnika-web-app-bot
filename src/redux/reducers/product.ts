@@ -77,6 +77,9 @@ export const productSlice = createSlice({
         );
       }
     },
+    DeleteLike: (state, action: PayloadAction<string>) => {
+      state.likes.filter((el) => el.id !== action.payload);
+    },
   },
 });
 
@@ -89,6 +92,7 @@ export const {
   IncrimentCart,
   AddLike,
   SetLike,
+  DeleteLike,
 } = productSlice.actions;
 
 export default productSlice.reducer;
