@@ -70,11 +70,13 @@ export const productSlice = createSlice({
       if (index < -1) {
         state.likes = [...state.likes, action.payload];
       } else {
-        state.likes.filter(
-          (el) =>
-            el.productId !== action.payload.productId &&
-            el.userId !== action.payload.userId
-        );
+        state.likes = [
+          ...state.likes.filter(
+            (el) =>
+              el.productId !== action.payload.productId &&
+              el.userId !== action.payload.userId
+          ),
+        ];
       }
     },
     DeleteLike: (state, action: PayloadAction<string>) => {
