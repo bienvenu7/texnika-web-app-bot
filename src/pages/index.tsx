@@ -1,6 +1,7 @@
 import Categories from "@/components/home/Categories";
 import Cover from "@/components/home/Cover";
 import Products from "@/components/home/Products";
+import telegram from "@/hooks/telegram";
 import { SetPictures } from "@/redux/reducers/categoryReducers";
 import { SetAllProducts, SetLike } from "@/redux/reducers/product";
 import { AppDispatch } from "@/redux/store";
@@ -23,6 +24,15 @@ interface Props {
 export default function Home({ categories, products, images, likes }: Props) {
   const dispatch: AppDispatch = useDispatch();
 
+  const { user } = telegram();
+
+  const userLIkes = likes.filter((el) => el.userId === 1180624081);
+  console.log(userLIkes);
+
+  console.log(
+    userLIkes.map((el) => products.find((i) => i.id === el.productId))
+  );
+
   useEffect(() => {
     dispatch(SetAllProducts(products));
     dispatch(SetPictures(images));
@@ -38,13 +48,19 @@ export default function Home({ categories, products, images, likes }: Props) {
         btnTitle="View All"
         isLoved={false}
         products={[]}
-      />
-      <Products
-        title="Liked By you"
-        btnTitle="View More"
-        isLoved={true}
-        products={[]}
       /> */}
+      {userLIkes.length > 0 && (
+        <Products
+          title="Liked By you"
+          btnTitle="View More"
+          isLoved={true}
+          products={
+            userLIkes.map((el) =>
+              products.find((i) => i.id === el.productId)
+            ) as IProduct[]
+          }
+        />
+      )}
       <Products
         title="Sales"
         btnTitle="View All"

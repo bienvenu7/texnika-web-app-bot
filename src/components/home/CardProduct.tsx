@@ -1,4 +1,5 @@
-import { selectPictures } from "@/redux/selectors/productSelector";
+import telegram from "@/hooks/telegram";
+import { selectLikes, selectPictures } from "@/redux/selectors/productSelector";
 import { IPicture, IProduct } from "@/types/app";
 import { getPictures } from "@/utils/apis/picture";
 import Image from "next/image";
@@ -18,6 +19,10 @@ const CardProduct = ({ myCard, isLoved }: Props) => {
   const images = useSelector(selectPictures).filter(
     (el) => el.referId === myCard.id
   );
+  const { user } = telegram();
+  const likes = useSelector(selectLikes).filter(
+    (el) => el.userId === user?.id && el.productId === myCard.id
+  );
 
   return (
     <div
@@ -28,10 +33,7 @@ const CardProduct = ({ myCard, isLoved }: Props) => {
     >
       <div className="products__card--top">
         <Image src={images[0]?.url} alt="" fill />
-        <button>
-          <SvgSelector id="heart" />
-        </button>
-        <button>
+        <button className={likes.length > 0 ? "like" : ""}>
           <SvgSelector id="heart" />
         </button>
       </div>

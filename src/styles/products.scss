@@ -95,6 +95,15 @@
         top: 10px;
         background-color: transparent;
 
+        &.like {
+          // background-color: $pink-clr;
+
+          & > svg {
+            stroke: rgba($color: $pink-clr, $alpha: 0.5);
+            fill: rgba($color: $pink-clr, $alpha: 0.7);
+          }
+        }
+
         & > svg {
           width: 22px;
           height: 22px;
